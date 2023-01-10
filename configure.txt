@@ -1,5 +1,5 @@
-local ip = 192.168.56.1
-public ip = 103.94.69.52
+local ip = ?
+public ip = ?
 
 
 Router configuration (port forwarding):
