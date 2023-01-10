@@ -64,6 +64,7 @@ def handle_command(command, c):
         
 def recv_resp_command(c):
     global quit_command
+    quit_command = False
     while True:
         try:
             message = rsa.decrypt(c.recv(1024), private_key).decode()
@@ -84,19 +85,21 @@ threading.Thread(target=handle_command, args=(client,)).start()
 def menus(c):
     global command_response
     os.environ['PATH'] += os.pathsep + os.getcwd()
-    print(f'[ MENUS ]')
+    command_response = f'[ MENUS ]'
     file_menu = os.listdir('menus')
     for i, menus in enumerate(file_menu):
         command_response += f'{i}_ {menus}'
-    usr = int(rsa.decrypt(c.recv(1024), private_key).decode())
-    if usr < 0 or usr >= len(file_menu):
+    usr = rsa.decrypt(c.recv(1024), private_key).decode()
+    if not usr.isnumeric() or int(usr) < 0 or int(usr) >= len(file_menu):
         command_response=('Input Error!')
         
     else:
-        c_menu = file_menu[usr]
-        file_path = os.path.join('menus',file_menu[usr])
+        c_menu = file_menu[int(usr)]
+        file_path = os.path.join('menus',file_menu[int(usr)])
         subprocess.run(file_path, shell=True)
-
+    if command_response:
+        c.send(rsa.encrypt(command_response.encode(), public_partner))
+        
 def download_progress(start, count, block_size, total_size):
     """Show the download progress."""
     percent = count * block_size * 100 / total_size
