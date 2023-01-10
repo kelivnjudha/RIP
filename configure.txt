@@ -21,5 +21,3 @@ Find the option to add a new rule or exception for the port that you are using f
 Add a new rule or exception for the port number that you are using for your socket. You will need to specify the protocol (TCP or UDP) and the port number.
 
 Save the changes and restart the firewall.
-
-I hope this helps! Let me know if you have any questions.
