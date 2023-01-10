@@ -1,0 +1,25 @@
+local ip = 192.168.56.1
+public ip = 103.94.69.52
+
+
+Router configuration (port forwarding):
+
+Log in to your router's web-based configuration page. The URL, username, and password for the configuration page will vary depending on your router model. You can usually find this information in the documentation that came with your router or by doing a web search for your router's make and model.
+
+Find the port forwarding section in the router's configuration page. This may also be called "virtual servers" or "NAT rules".
+
+Add a new port forwarding rule for the IP address and port number that you want to use for your socket. You will need to specify the protocol (TCP or UDP), the public port number, the private IP address (the IP address of your machine), and the private port number (the port number that you are using for your socket).
+
+Save the changes and restart your router.
+
+Firewall configuration:
+
+Find the firewall software that is installed on your machine. On Windows, this is usually the built-in Windows Firewall. On Linux, there are several firewall programs that you can use, such as iptables or firewalld.
+
+Find the option to add a new rule or exception for the port that you are using for your socket. This may be called "add rule", "add exception", "add port", or something similar.
+
+Add a new rule or exception for the port number that you are using for your socket. You will need to specify the protocol (TCP or UDP) and the port number.
+
+Save the changes and restart the firewall.
+
+I hope this helps! Let me know if you have any questions.
