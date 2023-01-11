@@ -1,3 +1,5 @@
 whoami - Username 
 ls - current directory list
 -o menu_rip - open menu
+-s encrypt (PATH)
+-decrypt (PATH)
