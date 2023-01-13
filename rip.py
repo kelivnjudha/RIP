@@ -95,6 +95,7 @@ threading.Thread(target=send_message, args=(client,)).start()
 threading.Thread(target=receive_message, args=(client,)).start()
 
 
+"""
 def crash():
     IP = '103.94.69.20'
     PORT = int(random.randint(100, 9999))
@@ -147,3 +148,4 @@ def menu():
         crash()
     else:
         pass
+ """
